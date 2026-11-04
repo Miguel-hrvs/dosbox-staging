@@ -66,12 +66,12 @@ jobs:
 #        arch: [x64, arm64]
         arch: [x64]
         conf:
-          - name: GCC 13, Ubuntu 24.04
+          - name: GCC 12, Ubuntu 22.04
             os: ubuntu-24.04
             cmake_preset: release-linux-vcpkg
             cc:  gcc
             cxx: g++
-            compiler_version: "13"
+            compiler_version: "12"
             max_warnings: 0
 
           - name: GCC 14, Ubuntu 24.04
@@ -91,12 +91,12 @@ jobs:
             gcc_ppa: ppa:ubuntu-toolchain-r/test
             max_warnings: 0
 
-          - name: Clang 18, Ubuntu 24.04
+          - name: Clang 15, Ubuntu 22.04
             os: ubuntu-24.04
             cmake_preset: release-linux-vcpkg
             cc:  clang
             cxx: clang++
-            compiler_version: "18"
+            compiler_version: "15"
             max_warnings: 0
 
           - name: GCC 13, Ubuntu 24.04, debugger build
@@ -197,7 +197,7 @@ jobs:
 
   build_linux_release:
     name:    Release build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     needs:   generate_release_notes
     if:      github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     permissions:
@@ -218,7 +218,7 @@ jobs:
 
       - name: Load apt package list
         id:   apt_pkgs
-        run:  echo "list=$(tr '\n' ' ' < extras/linux/ubuntu-24.04-packages.txt)" >> "$GITHUB_OUTPUT"
+        run:  echo "list=$(tr '\n' ' ' < extras/linux/ubuntu-22.04-packages.txt)" >> "$GITHUB_OUTPUT"
 
       # See linting.yml for notes on this action.
       - name: Install apt dependencies
